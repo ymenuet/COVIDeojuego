@@ -1,2 +1,3 @@
 # COVIDeojuego
-Ironhack project 1
+Ironhack WDFTMEX - Project #1
+Edgar Antonio VILLAVICENCIO CASTILLO & Yvan MENUET
