@@ -20,29 +20,33 @@ class Board {
 //AMLO OFFSETS  this.xFace = this.x + 19;  this.yFace = this.y - 30;    this.widthFace = this.width / 2 + 15;     this.heightFace = this.height / 2 + 15;
 
 class Character {
-    constructor(name, imageFaceSrc) {
-        this.name = name;
+    constructor(character) {
+        this.name = character.name;
         this.height = 450 / 3;
         this.width = 624 / 6;
-        this.widthFace = this.width / 2 + 15;
-        this.heightFace = this.height / 2 + 15;
         this.x = 300;
         this.y = $canvas.height - this.height - 10;
-        this.xFace = this.x + 19;
-        this.yFace = this.y - 30;
         this.velX = 0;
         this.velY = 0;
         this.jumping = false;
         this.jumpStrength = 20;
         this.imageBody = new Image();
-        this.imageFace = new Image();
         this.imageBody.src = "../img/spriters/spriter3.png";
-        this.imageFace.src = imageFaceSrc;
+        this.imageFace = new Image();
+        this.imageFace.src = character.img;
         this.animateX = 0;
         this.animateY = 0;
-        this.imageMask = new Image()
-        this.imageMask.src = '../img/objects/cubrebocas-puesto.png'
-        this.hasMask = false
+        this.imageMask = new Image();
+        this.imageMask.src = '../img/objects/cubrebocas-puesto.png';
+        this.hasMask = false;
+        this.offsetX = character.offsetX;
+        this.offsetY = character.offsetY;
+        this.ratioWidth = character.ratioWidth;
+        this.ratioHeight = character.ratioHeight;
+        this.offsetMaskX = character.offsetMaskX;
+        this.offsetMaskY = character.offsetMaskY;
+        this.ratioMaskWidth = character.ratioMaskWidth;
+        this.ratioMaskHeight = character.ratioMaskHeight;
     }
     draw() {
         if (this.y > $canvas.height - this.height - 10) {
@@ -62,18 +66,18 @@ class Character {
         );
         ctx.drawImage(
             this.imageFace,
-            this.x + 19,
-            this.y - 30,
-            this.width / 2 + 15,
-            this.height / 2 + 15
+            this.x + this.offsetX,
+            this.y + this.offsetY,
+            this.width * this.ratioWidth,
+            this.height * this.ratioHeight
         );
         if (this.hasMask) {
             ctx.drawImage(
                 this.imageMask,
-                this.x + 22,
-                this.y + 11,
-                this.width / 2 + 15,
-                this.height / 3
+                this.x + this.offsetMaskX,
+                this.y + this.offsetMaskY,
+                this.width * this.ratioMaskWidth,
+                this.height * this.ratioMaskHeight
             )
         }
     }
