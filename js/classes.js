@@ -97,6 +97,7 @@ class Character {
     }
     jump() {
         if (!this.jumping) {
+            this.animateX = 0
             this.velY = -this.jumpStrength;
             this.jumping = true;
         }

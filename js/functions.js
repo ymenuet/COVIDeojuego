@@ -12,19 +12,14 @@ function clearCanvas() {
 }
 
 function checkKeys() {
-    switch (true) {
-        case keys[39]: //right arrow
-            character.moveRight()
-            break;
-        case keys[37]: //left arrow
-            character.moveLeft()
-            break;
-        case keys[38]: //up arrow
-            character.jump()
-            break;
-        case keys[32]: //spacebar
-            character.jump()
-            break;
+    if (keys[39]) {
+        character.moveRight()
+    }
+    if (keys[37]) {
+        character.moveLeft()
+    }
+    if (keys[38] || keys[32]) {
+        character.jump()
     }
 }
 
