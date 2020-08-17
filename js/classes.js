@@ -40,7 +40,9 @@ class Character {
         this.imageFace.src = imageFaceSrc;
         this.animateX = 0;
         this.animateY = 0;
-        this.imageBody.onload = () => this.draw();
+        this.imageMask = new Image()
+        this.imageMask.src = '../img/objects/cubrebocas-puesto.png'
+        this.hasMask = false
     }
     draw() {
         if (this.y > $canvas.height - this.height - 10) {
@@ -65,14 +67,22 @@ class Character {
             this.width / 2 + 15,
             this.height / 2 + 15
         );
+        if (this.hasMask) {
+            ctx.drawImage(
+                this.imageMask,
+                this.x + 22,
+                this.y + 11,
+                this.width / 2 + 15,
+                this.height / 3
+            )
+        }
     }
     moveRight() {
-
         this.x += this.velX;
         this.velX++;
         this.velX *= friction;
         this.animateY = 0;
-        if (frames % 5 === 0) {
+        if (frames % 5 === 0 && !this.jumping) {
             this.animateX++;
             if (this.animateX > 5) this.animateX = 0;
         }
@@ -82,7 +92,7 @@ class Character {
         this.velX++;
         this.velX *= friction;
         this.animateY = 1;
-        if (frames % 5 === 0) {
+        if (frames % 5 === 0 && !this.jumping) {
             this.animateX++;
             if (this.animateX > 5) this.animateX = 0;
         }
