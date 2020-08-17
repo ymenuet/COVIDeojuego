@@ -6,6 +6,8 @@ const gravity = 0.98;
 const friction = 0.8;
 let intervalId;
 let keys = [];
+let enemies = [];
+let faceMasks = [];
 
 const amlo = {
     name: 'Andrés Manuel López Obrador',

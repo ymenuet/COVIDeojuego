@@ -1,5 +1,4 @@
 // board class
-
 class Board {
     constructor(width, height, imageSrc) {
         this.x = 0;
@@ -16,12 +15,10 @@ class Board {
 }
 
 //class character
-
-//AMLO OFFSETS  this.xFace = this.x + 19;  this.yFace = this.y - 30;    this.widthFace = this.width / 2 + 15;     this.heightFace = this.height / 2 + 15;
-
 class Character {
     constructor(character) {
         this.name = character.name;
+        this.lives = 3;
         this.height = 450 / 3;
         this.width = 624 / 6;
         this.x = 300;
@@ -29,7 +26,8 @@ class Character {
         this.velX = 0;
         this.velY = 0;
         this.jumping = false;
-        this.jumpStrength = 20;
+        this.jumpStrength = 23;
+        this.onPlatform = [];
         this.imageBody = new Image();
         this.imageBody.src = "../img/spriters/spriter3.png";
         this.imageFace = new Image();
@@ -90,6 +88,7 @@ class Character {
             this.animateX++;
             if (this.animateX > 5) this.animateX = 0;
         }
+        if (this.x > $canvas.width - this.width) this.x = $canvas.width - this.width
     }
     moveLeft() {
         this.x -= this.velX;
@@ -100,6 +99,7 @@ class Character {
             this.animateX++;
             if (this.animateX > 5) this.animateX = 0;
         }
+        if (this.x < 0) this.x = 0;
     }
     gravity() {
         this.y += this.velY;
@@ -107,13 +107,69 @@ class Character {
         if (this.y > $canvas.height - this.height - 10) {
             this.y = $canvas.height - this.height - 10;
             this.jumping = false;
+            this.onPlatform.forEach(el => el = false);
         }
     }
     jump() {
         if (!this.jumping) {
-            this.animateX = 0
+            this.animateX = 0;
             this.velY = -this.jumpStrength;
             this.jumping = true;
         }
+    }
+}
+
+//Obstacle class
+class Enemy {
+    constructor(randomX) {
+        this.x = randomX;
+        this.y = -10;
+        this.width = 50;
+        this.height = 50;
+        this.image = new Image();
+        this.image.src = "../img/objects/covid.png";
+    }
+    draw() {
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.y = this.y + 3;
+    }
+}
+
+class FaceMask extends Enemy {
+    constructor(randomX) {
+        super(randomX)
+        this.image.src = '../img/objects/cubrebocas.png'
+        this.width = 80
+    }
+    draw() {
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.y = this.y + 2;
+    }
+}
+// class Seringe extends FaceMask {
+//     constructor(randomX) {
+//         super(randomX)
+//         this.image.src = '../img/objects/jeringa.png'
+//         this.width = 80
+//     }
+//     draw() {
+//         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+//         this.y = this.y + 2;
+//     }
+// }
+
+class Platform {
+    constructor(randomX, randomY) {
+        this.x = randomX;
+        this.y = randomY;
+        this.width = 160;
+        this.height = 160;
+        this.img = new Image();
+        this.img.src = '../img/objects/jabon.png'
+    }
+    draw() {
+        ctx.drawImage(this.img, this.x, this.y, this.width / 2, this.height / 2)
+        ctx.drawImage(this.img, this.x + 80, this.y, this.width / 2, this.height / 2)
+
     }
 }
