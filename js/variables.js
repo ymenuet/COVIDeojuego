@@ -6,10 +6,11 @@ const gravity = 0.98;
 const friction = 0.8;
 let intervalId;
 let keys = [];
+let enemies = [];
 
 const amlo = {
-    offsetX: 19,
-    offsetY: -30,
-    offsetMaskX: 22,
-    offsetMaskY: 11,
-}
+  offsetX: 19,
+  offsetY: -30,
+  offsetMaskX: 22,
+  offsetMaskY: 11,
+};
