@@ -10,7 +10,7 @@ class Board {
         this.image.onload = () => this.draw();
     }
     draw() {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.image, this.x, this.y - 300, this.width, this.height);
     }
 }
 
@@ -18,6 +18,7 @@ class Board {
 class Character {
     constructor(character) {
         this.name = character.name;
+        this.gender = character.gender;
         this.lives = 3;
         this.height = 450 / 3;
         this.width = 624 / 6;
@@ -35,8 +36,9 @@ class Character {
         this.animateX = 0;
         this.animateY = 0;
         this.imageMask = new Image();
-        this.imageMask.src = '../img/objects/cubrebocas-puesto.png';
+        this.imageMask.src = "../img/objects/cubrebocas-puesto.png";
         this.hasMask = false;
+        this.transparency = 1;
         this.offsetX = character.offsetX;
         this.offsetY = character.offsetY;
         this.ratioWidth = character.ratioWidth;
@@ -51,6 +53,7 @@ class Character {
             this.y = $canvas.height - this.height - 10;
             this.jumping = false;
         }
+        ctx.globalAlpha = this.transparency;
         ctx.drawImage(
             this.imageBody,
             this.width * this.animateX,
@@ -76,8 +79,9 @@ class Character {
                 this.y + this.offsetMaskY,
                 this.width * this.ratioMaskWidth,
                 this.height * this.ratioMaskHeight
-            )
+            );
         }
+        ctx.globalAlpha = 1;
     }
     moveRight() {
         this.x += this.velX;
@@ -88,7 +92,8 @@ class Character {
             this.animateX++;
             if (this.animateX > 5) this.animateX = 0;
         }
-        if (this.x > $canvas.width - this.width) this.x = $canvas.width - this.width
+        if (this.x > $canvas.width - this.width)
+            this.x = $canvas.width - this.width;
     }
     moveLeft() {
         this.x -= this.velX;
@@ -107,7 +112,7 @@ class Character {
         if (this.y > $canvas.height - this.height - 10) {
             this.y = $canvas.height - this.height - 10;
             this.jumping = false;
-            this.onPlatform.forEach(el => el = false);
+            this.onPlatform.forEach((el) => (el = false));
         }
     }
     jump() {
@@ -116,6 +121,13 @@ class Character {
             this.velY = -this.jumpStrength;
             this.jumping = true;
         }
+    }
+    changeTransparency() {
+        let intervalCollision = setInterval(() => {
+            if (this.transparency === 1) this.transparency = 0.5;
+            else if (this.transparency === 0.5) this.transparency = 1;
+        }, 1000 / 6)
+        setTimeout(() => clearInterval(intervalCollision), 1000)
     }
 }
 
@@ -137,9 +149,9 @@ class Enemy {
 
 class FaceMask extends Enemy {
     constructor(randomX) {
-        super(randomX)
-        this.image.src = '../img/objects/cubrebocas.png'
-        this.width = 80
+        super(randomX);
+        this.image.src = "../img/objects/cubrebocas.png";
+        this.width = 80;
     }
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
@@ -163,13 +175,11 @@ class Platform {
         this.x = randomX;
         this.y = randomY;
         this.width = 160;
-        this.height = 160;
+        this.height = 60;
         this.img = new Image();
-        this.img.src = '../img/objects/jabon.png'
+        this.img.src = "../img/bg/brick-platform.png";
     }
     draw() {
-        ctx.drawImage(this.img, this.x, this.y, this.width / 2, this.height / 2)
-        ctx.drawImage(this.img, this.x + 80, this.y, this.width / 2, this.height / 2)
-
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 }

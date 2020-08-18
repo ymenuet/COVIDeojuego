@@ -11,6 +11,7 @@ let faceMasks = [];
 
 const amlo = {
     name: 'Andrés Manuel López Obrador',
+    gender: 'he',
     img: '../img/characters/amlo.png',
     offsetX: 19,
     offsetY: -35,
@@ -23,6 +24,7 @@ const amlo = {
 }
 const trump = {
     name: 'Donald Trump',
+    gender: 'he',
     img: '../img/characters/trump.png',
     offsetX: 19,
     offsetY: -30,
@@ -35,6 +37,7 @@ const trump = {
 }
 const macron = {
     name: 'Emmanuel Macron',
+    gender: 'he',
     img: '../img/characters/macron.png',
     offsetX: 19,
     offsetY: -30,
@@ -47,6 +50,7 @@ const macron = {
 }
 const putin = {
     name: 'Vladimir Putin',
+    gender: 'he',
     img: '../img/characters/putin.png',
     offsetX: 11,
     offsetY: -30,
@@ -59,6 +63,7 @@ const putin = {
 }
 const merkel = {
     name: 'Angela Merkel',
+    gender: 'she',
     img: '../img/characters/merkel.png',
     offsetX: 15,
     offsetY: -32,
@@ -71,6 +76,7 @@ const merkel = {
 }
 const johnson = {
     name: 'Boris Johnson',
+    gender: 'he',
     img: '../img/characters/johnson.png',
     offsetX: 16,
     offsetY: -34,
@@ -83,6 +89,7 @@ const johnson = {
 }
 const jinping = {
     name: 'Xi Jinping',
+    gender: 'he',
     img: '../img/characters/jinping.png',
     offsetX: 20,
     offsetY: -32,
