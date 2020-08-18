@@ -7,7 +7,6 @@ function update() {
     checkKeys();
     drawPlatforms();
     collisionPlatform();
-    character.draw();
     liveDrawer();
     createEnemy();
     drawEnemies();
@@ -16,6 +15,7 @@ function update() {
     drawFaceMasks();
     createSeringe();
     drawSeringe();
+    character.draw();
     collisionSeringe();
     winner();
     gameOver();
@@ -151,7 +151,7 @@ function createSeringe() {
 function drawSeringe() {
     seringes.forEach((seringe, index) => {
         seringe.draw();
-        if (frames % 1000 === 0) {
+        if (seringe.time > 400) {
             removeSeringe(index);
         }
     });
