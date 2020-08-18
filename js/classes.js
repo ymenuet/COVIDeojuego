@@ -18,6 +18,7 @@ class Board {
 class Character {
   constructor(character) {
     this.name = character.name;
+    this.gender = character.gender;
     this.lives = 3;
     this.height = 450 / 3;
     this.width = 624 / 6;
@@ -37,6 +38,7 @@ class Character {
     this.imageMask = new Image();
     this.imageMask.src = "../img/objects/cubrebocas-puesto.png";
     this.hasMask = false;
+    this.transparency = 1;
     this.offsetX = character.offsetX;
     this.offsetY = character.offsetY;
     this.ratioWidth = character.ratioWidth;
@@ -51,6 +53,7 @@ class Character {
       this.y = $canvas.height - this.height - 10;
       this.jumping = false;
     }
+    ctx.globalAlpha = this.transparency;
     ctx.drawImage(
       this.imageBody,
       this.width * this.animateX,
@@ -78,6 +81,7 @@ class Character {
         this.height * this.ratioMaskHeight
       );
     }
+    ctx.globalAlpha = 1;
   }
   moveRight() {
     this.x += this.velX;
@@ -117,6 +121,13 @@ class Character {
       this.velY = -this.jumpStrength;
       this.jumping = true;
     }
+  }
+  changeTransparency() {
+    let intervalCollision = setInterval(() => {
+      if (this.transparency === 1) this.transparency = 0.5;
+      else if (this.transparency === 0.5) this.transparency = 1;
+    }, 1000 / 6);
+    setTimeout(() => clearInterval(intervalCollision), 1000);
   }
 }
 
@@ -179,7 +190,7 @@ class Platform {
 
 class WinSeringe {
   constructor() {
-    this.seringePercentage = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    this.seringePercentage = [];
     this.x = 30;
     this.y = 7;
     this.height = 70;

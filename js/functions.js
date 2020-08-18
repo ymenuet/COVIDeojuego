@@ -11,11 +11,13 @@ function update() {
   liveDrawer();
   createEnemy();
   drawEnemies();
+  collisionEnemy();
   createFaceMasks();
   drawFaceMasks();
   createSeringe();
   drawSeringe();
   collisionSeringe();
+  gameOver();
 }
 
 function clearCanvas() {
@@ -32,14 +34,22 @@ function createEnemy() {
 function drawEnemies() {
   enemies.forEach((enemy, index) => {
     enemy.draw();
+    if (enemy.y > $canvas.height) {
+      enemies.splice(index, 1);
+    }
+  });
+}
+
+function collisionEnemy() {
+  enemies.forEach((enemy, index) => {
     if (collisionDetecter(enemy)) {
       enemies.splice(index, 1);
       if (character.hasMask) {
         character.hasMask = false;
-      } else character.lives--;
-    }
-    if (enemy.y > $canvas.height) {
-      enemies.splice(index, 1);
+      } else {
+        character.changeTransparency();
+        character.lives--;
+      }
     }
   });
 }
@@ -130,9 +140,9 @@ function liveDrawer() {
 //Seringes
 
 function createSeringe() {
-  if (frames % 500 === 0) {
+  if (frames % 500 === 0 && seringes.length < 3) {
     let randomX = Math.floor(Math.random() * ($canvas.width - 50 - 20 + 20));
-    let randomY = Math.floor(Math.random() * ($canvas.height - 100 - 20 + 20));
+    let randomY = Math.floor(Math.random() * ($canvas.height - 340 - 20 + 20));
     seringes.push(new Seringe(randomX, randomY));
   }
 }
@@ -157,6 +167,36 @@ function collisionSeringe() {
 
 function removeSeringe(index) {
   seringes.splice(index, 1);
+}
+
+function gameOver() {
+  if (character.lives < 1) {
+    setTimeout(() => {
+      clearInterval(intervalId);
+      ctx.fillStyle = "rgba(183, 28, 28, 0.7)";
+      ctx.beginPath();
+      ctx.moveTo(210, 100);
+      ctx.lineTo(790, 100);
+      ctx.arc(780, 120, 20, Math.PI / 2, 0);
+      ctx.lineTo(800, 490);
+      ctx.arc(780, 480, 20, 0, Math.PI / 2);
+      ctx.lineTo(210, 500);
+      ctx.arc(220, 480, 20, -Math.PI / 2, -Math.PI);
+      ctx.lineTo(200, 110);
+      ctx.arc(220, 120, 20, Math.PI, Math.PI / 2);
+      ctx.fill();
+      ctx.closePath();
+      ctx.font = '100px "Covered By Your Grace"';
+      ctx.fillStyle = "white";
+      ctx.fillText("Game Over", 300, 200);
+      ctx.font = '40px "Covered By Your Grace"';
+      ctx.fillText(`${character.name}`, 250, 270);
+      ctx.fillText(`tried to save the world.`, 250, 320);
+      ctx.fillText(`But ${character.gender} died,`, 250, 370);
+      ctx.fillText(`and humanity as well.`, 250, 420);
+      ctx.fillText(`COVID-19 wins...`, 250, 470);
+    }, 1000 / 3);
+  }
 }
 
 intervalId = setInterval(update, 1000 / 60);
