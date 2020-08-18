@@ -102,3 +102,5 @@ const jinping = {
     ratioMaskWidth: 1 / 1.2,
     ratioMaskHeight: 1 / 3.2,
 };
+
+let chosenCharacter = amlo;

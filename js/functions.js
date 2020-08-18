@@ -241,4 +241,10 @@ function gameOver() {
     }
 }
 
-intervalId = setInterval(update, 1000 / 60);
+function setCharacter(chosenCharacter) {
+    character = new Character(chosenCharacter)
+}
+
+function startGame() {
+    intervalId = setInterval(update, 1000 / 60);
+}
