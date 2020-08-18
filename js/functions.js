@@ -181,7 +181,8 @@ function winner() {
     if (winSeringe.seringePercentage.length > 9) {
         setTimeout(() => {
             clearInterval(intervalId);
-            ctx.fillStyle = "rgba(46, 125, 50, 0.7)";
+            ctx.fillStyle = "rgb(46, 125, 50)";
+            ctx.globalAlpha = 0.1;
             ctx.beginPath();
             ctx.moveTo(210, 100);
             ctx.lineTo(790, 100);
@@ -194,6 +195,7 @@ function winner() {
             ctx.arc(220, 120, 20, Math.PI, Math.PI / 2);
             ctx.fill();
             ctx.closePath();
+            ctx.globalAlpha = 1;
             ctx.font = '70px "Covered By Your Grace"';
             ctx.fillStyle = "white";
             ctx.fillText("Level Completed!", 250, 200);
@@ -211,6 +213,8 @@ function gameOver() {
     if (character.lives < 1) {
         setTimeout(() => {
             clearInterval(intervalId);
+            ctx.fillStyle = "rgb(183, 28, 28)";
+            ctx.globalAlpha = 0.1;
             ctx.beginPath();
             ctx.moveTo(210, 100);
             ctx.lineTo(790, 100);
@@ -221,9 +225,9 @@ function gameOver() {
             ctx.arc(220, 480, 20, -Math.PI / 2, -Math.PI);
             ctx.lineTo(200, 110);
             ctx.arc(220, 120, 20, Math.PI, Math.PI / 2);
-            ctx.fillStyle = "rgba(183, 28, 28, 0.7)";
             ctx.fill();
             ctx.closePath();
+            ctx.globalAlpha = 1;
             ctx.font = '100px "Covered By Your Grace"';
             ctx.fillStyle = "white";
             ctx.fillText("Game Over", 300, 200);
