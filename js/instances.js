@@ -1,5 +1,6 @@
 const board = new Board(2000, 900, "../img/bg/backgroundCity.png");
 let character = new Character(amlo);
+let winSeringe = new WinSeringe();
 let platforms = [
   new Platform(100, 320),
   new Platform(400, 200),

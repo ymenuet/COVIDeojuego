@@ -147,17 +147,19 @@ class FaceMask extends Enemy {
     this.y = this.y + 2;
   }
 }
-// class Seringe extends FaceMask {
-//     constructor(randomX) {
-//         super(randomX)
-//         this.image.src = '../img/objects/jeringa.png'
-//         this.width = 80
-//     }
-//     draw() {
-//         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-//         this.y = this.y + 2;
-//     }
-// }
+class Seringe {
+  constructor(randomX, randomY) {
+    this.x = randomX;
+    this.y = randomY;
+    this.width = 50;
+    this.height = 50;
+    this.image = new Image();
+    this.image.src = "../img/objects/seringeDef.png";
+  }
+  draw() {
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+  }
+}
 
 class Platform {
   constructor(randomX, randomY) {
@@ -170,5 +172,34 @@ class Platform {
   }
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+}
+
+//Win seringe
+
+class WinSeringe {
+  constructor() {
+    this.seringePercentage = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    this.x = 30;
+    this.y = 7;
+    this.height = 70;
+    this.width = 280;
+    this.image = new Image();
+    this.image.src = "../img/objects/jeringa.png";
+  }
+  draw() {
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+
+    var gradient = ctx.createLinearGradient(10, 90, 200, 90);
+    gradient.addColorStop(0, "blue");
+    gradient.addColorStop(1, "white");
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+      this.x + 5,
+      this.y + 26,
+      (this.width - 100) * (this.seringePercentage.length / 10),
+      this.height - 55
+    );
   }
 }
