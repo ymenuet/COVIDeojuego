@@ -203,7 +203,7 @@ class WinSeringe {
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
-        var gradient = ctx.createLinearGradient(10, 90, 200, 90);
+        const gradient = ctx.createLinearGradient(10, 90, 200, 90);
         gradient.addColorStop(0, "blue");
         gradient.addColorStop(1, "white");
         ctx.fillStyle = gradient;

@@ -141,17 +141,24 @@ function liveDrawer() {
 //Seringes
 
 function createSeringe() {
-    if (frames % 500 === 0 && seringes.length < 3) {
-        let randomX = Math.floor(Math.random() * ($canvas.width - 50 - 20 + 20));
-        let randomY = Math.floor(Math.random() * ($canvas.height - 340 - 20 + 20));
+    if (frames % seringeApparition === 0 && seringes.length < 3) {
+        const maxX = $canvas.width - 50;
+        const minX = 20;
+        const maxY = $canvas.height - 340;
+        const minY = 40;
+        const maxTime = 900;
+        const minTime = 400;
+        const randomX = Math.floor(Math.random() * (maxX - minX) + minX);
+        const randomY = Math.floor(Math.random() * (maxY - minY) + minY);
         seringes.push(new Seringe(randomX, randomY));
+        seringeApparition = Math.floor(Math.random() * (maxTime - minTime) + minTime);
     }
 }
 
 function drawSeringe() {
     seringes.forEach((seringe, index) => {
         seringe.draw();
-        if (seringe.time > 400) {
+        if (seringe.time > 300) {
             removeSeringe(index);
         }
     });
@@ -192,8 +199,8 @@ function winner() {
             ctx.fillText("Level Completed!", 250, 200);
             ctx.font = '40px "Covered By Your Grace"';
             ctx.fillText(`${character.name}`, 250, 270);
-            ctx.fillText(`tried to save the world.`, 250, 320);
-            ctx.fillText(`And ${character.gender} did it!!!`, 250, 370);
+            ctx.fillText(`tried to save the world...`, 250, 320);
+            ctx.fillText(`AND ${character.gender.toUpperCase()} DID IT!!!`, 250, 370);
             ctx.fillText(`Humanity wins,`, 250, 420);
             ctx.fillText(`COVID-19 loses...`, 250, 470);
         }, 1000 / 3);
@@ -204,7 +211,6 @@ function gameOver() {
     if (character.lives < 1) {
         setTimeout(() => {
             clearInterval(intervalId);
-            ctx.fillStyle = "rgba(183, 28, 28, 0.7)";
             ctx.beginPath();
             ctx.moveTo(210, 100);
             ctx.lineTo(790, 100);
@@ -215,6 +221,7 @@ function gameOver() {
             ctx.arc(220, 480, 20, -Math.PI / 2, -Math.PI);
             ctx.lineTo(200, 110);
             ctx.arc(220, 120, 20, Math.PI, Math.PI / 2);
+            ctx.fillStyle = "rgba(183, 28, 28, 0.7)";
             ctx.fill();
             ctx.closePath();
             ctx.font = '100px "Covered By Your Grace"';
