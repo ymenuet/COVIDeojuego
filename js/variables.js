@@ -10,6 +10,7 @@ let enemies = [];
 let faceMasks = [];
 let seringes = [];
 let seringeApparition = 500;
+let currentLevel = 1;
 
 const amlo = {
     name: "Andrés Manuel López Obrador",

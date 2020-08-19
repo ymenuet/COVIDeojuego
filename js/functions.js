@@ -7,6 +7,7 @@ function update() {
     checkKeys();
     drawPlatforms();
     collisionPlatform();
+    printLevel();
     liveDrawer();
     createEnemy();
     drawEnemies();
@@ -15,8 +16,9 @@ function update() {
     drawFaceMasks();
     createSeringe();
     drawSeringe();
-    character.draw();
     collisionSeringe();
+    passLevel();
+    character.draw();
     winner();
     gameOver();
 }
@@ -26,7 +28,7 @@ function clearCanvas() {
 }
 
 function createEnemy() {
-    if (frames % 100 === 0) {
+    if (frames % Math.floor(200 / currentLevel) === 0) {
         let randomX = Math.floor(Math.random() * ($canvas.width - 80 - 30) + 30);
         enemies.push(new Enemy(randomX));
     }
@@ -56,7 +58,7 @@ function collisionEnemy() {
 }
 
 function createFaceMasks() {
-    if (frames % 1000 === 0) {
+    if (frames % (1000 * currentLevel / 2) === 0) {
         let randomX = Math.floor(Math.random() * ($canvas.width - 80 - 30) + 30);
         faceMasks.push(new FaceMask(randomX));
     }
@@ -177,8 +179,48 @@ function removeSeringe(index) {
     seringes.splice(index, 1);
 }
 
+function printLevel() {
+    ctx.font = '40px "Covered By Your Grace"'
+    ctx.fillStyle = 'white';
+    ctx.fillText(`Current level: ${currentLevel}/5`, 730, 50)
+}
+
 function winner() {
-    if (winSeringe.seringePercentage.length > 9) {
+    if (winSeringe.seringePercentage.length > 9 && currentLevel >= 5) {
+        setTimeout(() => {
+            clearInterval(intervalId);
+            ctx.fillStyle = "rgb(251, 192, 45)";
+            ctx.globalAlpha = 0.1;
+            ctx.beginPath();
+            ctx.moveTo(210, 100);
+            ctx.lineTo(790, 100);
+            ctx.arc(780, 120, 20, Math.PI / 2, 0);
+            ctx.lineTo(800, 490);
+            ctx.arc(780, 480, 20, 0, Math.PI / 2);
+            ctx.lineTo(210, 500);
+            ctx.arc(220, 480, 20, -Math.PI / 2, -Math.PI);
+            ctx.lineTo(200, 110);
+            ctx.arc(220, 120, 20, Math.PI, Math.PI / 2);
+            ctx.fill();
+            ctx.closePath();
+            ctx.globalAlpha = 1;
+            ctx.font = '70px "Covered By Your Grace"';
+            ctx.fillStyle = "white";
+            ctx.fillText("YOU WIN!", 250, 200);
+            ctx.font = '40px "Covered By Your Grace"';
+            ctx.fillText(`${character.name}`, 250, 270);
+            ctx.fillText(`tried to save the world...`, 250, 320);
+            ctx.fillText(`AND ${character.gender.toUpperCase()} DID IT!!!`, 250, 370);
+            ctx.fillText(`Humanity wins,`, 250, 420);
+            ctx.fillText(`COVID-19 loses...`, 250, 470);
+            $pauseButton.style.display = 'none'
+            $restartButton.style.display = 'block'
+        }, 1000 / 3);
+    }
+}
+
+function passLevel() {
+    if (winSeringe.seringePercentage.length > 9 && currentLevel < 5) {
         setTimeout(() => {
             clearInterval(intervalId);
             ctx.fillStyle = "rgb(46, 125, 50)";
@@ -201,11 +243,16 @@ function winner() {
             ctx.fillText("Level Completed!", 250, 200);
             ctx.font = '40px "Covered By Your Grace"';
             ctx.fillText(`${character.name}`, 250, 270);
-            ctx.fillText(`tried to save the world...`, 250, 320);
-            ctx.fillText(`AND ${character.gender.toUpperCase()} DID IT!!!`, 250, 370);
-            ctx.fillText(`Humanity wins,`, 250, 420);
-            ctx.fillText(`COVID-19 loses...`, 250, 470);
+            ctx.fillText(`is trying to save the world...`, 250, 320);
+            ctx.fillText(
+                `AND IT IS WORKING!`,
+                250,
+                370
+            );
+            ctx.fillText(`COVID-19 loses...`, 250, 420);
+            ctx.fillText(`But there is still work to be done...`, 250, 470);
             $pauseButton.style.display = 'none'
+            $nextButton.style.display = 'block'
         }, 1000 / 3);
     }
 }
@@ -245,11 +292,28 @@ function gameOver() {
 }
 
 function setCharacter(chosenCharacter) {
-    character = new Character(chosenCharacter)
+    character = new Character(chosenCharacter);
+}
+
+function addLevel() {
+    currentLevel++;
+    character.lives = 3;
+    character.x = 300;
+    character.y = 200;
+    frames = 0;
+    keys = [];
+    enemies = [];
+    faceMasks = [];
+    seringes = [];
+    seringeApparition = 500
+    winSeringe.seringePercentage.splice(0, winSeringe.seringePercentage.length);
+    startGame();
 }
 
 function startGame() {
     intervalId = setInterval(update, 1000 / 60);
+    $restartButton.style.display = 'none'
+    $nextButton.style.display = 'none'
     $pauseButton.style.display = 'block'
 }
 

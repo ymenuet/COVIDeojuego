@@ -188,6 +188,20 @@ $pauseButton.addEventListener('click', () => {
 })
 
 
+// Next level button
+const $nextButton = document.createElement('button');
+$nextButton.classList.add('pause-btn');
+$nextButton.style.display = 'none';
+$nextButton.innerHTML = `
+<img src='../img/icons/play.png'>
+<span>NEXT LEVEL</span>
+`
+$body.appendChild($nextButton)
+
+$nextButton.addEventListener('click', () => {
+    addLevel()
+})
+
 // Restart game when gameOver
 const $restartButton = document.createElement('button');
 $restartButton.classList.add('pause-btn');
