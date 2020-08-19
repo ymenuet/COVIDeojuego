@@ -18,12 +18,14 @@ function update() {
   drawSeringe();
   collisionSeringe();
   passLevel();
+  generatePedestrians();
+  drawPedestrians();
+  fierroViejoFn();
+  collisionPedestrian();
   character.draw();
   winner();
   gameOver();
   lastLevelMusicPlay();
-  fierroViejoFn();
-  collisionPedestrian();
 }
 
 function clearCanvas() {
@@ -340,6 +342,7 @@ function addLevel() {
   keys = [];
   enemies = [];
   faceMasks = [];
+  pedestrians = [];
   seringes = [];
   seringeApparition = 500;
   winSeringe.seringePercentage.splice(0, winSeringe.seringePercentage.length);
@@ -367,8 +370,6 @@ function lastLevelMusicPlay() {
   }
 }
 
-function generatePedestrians() {}
-
 function fierroViejoFn() {
   if (frames % 4000 === 0) {
     fierroViejo.play();
@@ -383,20 +384,33 @@ function collisionPedestrian() {
       !pedestrian.hasTouched
     ) {
       accelerateVirus();
-      pedestrians.splice(index, 1);
-    } else if (collisionDetecter(pedestrian) && !pedestrian.hasTouched) {
-      pedestrians.splice(index, 1);
+      pedestrian.hasTouched = true;
     }
   });
 }
 
 function accelerateVirus() {
-  enemies.forEach((enemy) => {
-    enemy.increaseSpeed = true;
-  });
+  accelerateVirusLet = true;
+  alarm.play();
   setTimeout(() => {
-    enemies.forEach((enemy) => {
-      enemy.increaseSpeed = false;
-    });
-  }, 2000);
+    accelerateVirusLet = false;
+    alarm.pause();
+  }, 18000);
+}
+function generatePedestrians() {
+  if (frames % 1300 === 0) {
+    const randomMask = Math.round(Math.random());
+    if (randomMask) {
+      pedestrians.push(new Pedestrian(true));
+    } else pedestrians.push(new Pedestrian(false));
+  }
+  pedestrians.forEach((pedestrian, index) => {
+    if (pedestrian.x < -200) {
+      pedestrians.splice(index, 1);
+    }
+  });
+}
+
+function drawPedestrians() {
+  pedestrians.forEach((pedestrian) => pedestrian.draw());
 }

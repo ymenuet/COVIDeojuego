@@ -131,10 +131,56 @@ class Character {
   }
 }
 
+class Pedestrian extends Character {
+  constructor(hasMask) {
+    super(pedestrian);
+    this.hasMask = hasMask;
+    this.height = 450 / 3;
+    this.width = 624 / 6;
+    this.x = $canvas.width;
+    this.y = $canvas.height - (this.height * 4) / 5 - 10;
+    this.hasTouched = false;
+  }
+  draw() {
+    this.x--;
+    if (frames % 10 === 0) {
+      this.animateX++;
+      if (this.animateX > 5) this.animateX = 0;
+    }
+    ctx.drawImage(
+      this.imageBody,
+      this.width * this.animateX,
+      this.height,
+      this.width,
+      this.height,
+      this.x,
+      this.y,
+      (this.width * 4) / 5,
+      (this.height * 4) / 5
+    );
+    ctx.drawImage(
+      this.imageFace,
+      this.x + this.offsetX,
+      this.y + this.offsetY,
+      this.width * this.ratioWidth,
+      this.height * this.ratioHeight
+    );
+    if (this.hasMask) {
+      ctx.drawImage(
+        this.imageMask,
+        this.x + this.offsetMaskX,
+        this.y + this.offsetMaskY,
+        this.width * this.ratioMaskWidth,
+        this.height * this.ratioMaskHeight
+      );
+    }
+  }
+}
+
 //Obstacle class
 class Enemy {
   constructor(randomX) {
-    this.increaseSpeed = true;
+    this.increaseSpeed = accelerateVirusLet;
     this.x = randomX;
     this.y = -10;
     this.width = 50;

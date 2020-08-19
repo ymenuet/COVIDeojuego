@@ -22,6 +22,8 @@ const collectMask = new Audio("../sounds/collect-mask.mp3");
 const virusHit = new Audio("../sounds/virus-hit.mp3");
 const fierroViejo = new Audio("../sounds/fierro-viejo.mp3");
 fierroViejo.volume = 0.1;
+const alarm = new Audio("../sounds/alarm.mp3");
+alarm.volume = 1;
 
 let frames = 0;
 const gravity = 0.98;
@@ -33,6 +35,7 @@ let faceMasks = [];
 let seringes = [];
 let seringeApparition = 500;
 let currentLevel = 1;
+let accelerateVirusLet = false;
 
 const amlo = {
   name: "Andrés Manuel López Obrador",
@@ -124,6 +127,19 @@ const jinping = {
   offsetMaskY: 5,
   ratioMaskWidth: 1 / 1.2,
   ratioMaskHeight: 1 / 3.2,
+};
+const pedestrian = {
+  name: "Pedestrian",
+  gender: "he",
+  img: "../img/characters/pedestrian.png",
+  offsetX: 12,
+  offsetY: -28,
+  ratioWidth: 1 / 2,
+  ratioHeight: 1 / 2.3,
+  offsetMaskX: 6,
+  offsetMaskY: 5,
+  ratioMaskWidth: 1 / 1.5,
+  ratioMaskHeight: 1 / 3.6,
 };
 
 let chosenCharacter = amlo;
