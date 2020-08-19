@@ -1,7 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  background: url("../img/bg/bg-body.png");
+  background: url("../img/bg/bg-body.png"),
+    url("../img/objects/covid.png") left bottom no-repeat,
+    url("../img/objects/covid.png") right top no-repeat;
+  /* background: url("../img/bg/bg-body.png"); */
   background-color: #535b61;
   height: 100vh;
   display: flex;
@@ -168,4 +171,9 @@ h3 {
   width: 60px;
   position: relative;
   top: 15px;
+}
+.covid-img-bg {
+  width: 80px;
+  position: absolute;
+  left: 10px;
 }

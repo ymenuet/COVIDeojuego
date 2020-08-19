@@ -134,6 +134,7 @@ class Character {
 //Obstacle class
 class Enemy {
   constructor(randomX) {
+    this.increaseSpeed = true;
     this.x = randomX;
     this.y = -10;
     this.width = 50;
@@ -143,7 +144,15 @@ class Enemy {
   }
   draw() {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    this.y = this.y + 3;
+    if (this.increaseSpeed) {
+      this.y = this.y + 8;
+      ctx.fillStyle = "Red";
+      ctx.font = "30px Covered By Your Grace";
+      ctx.fillText(`You didn't respect social distancing!`, 320, 50);
+      ctx.fillText(`Watch out for the falling viruses!`, 320, 100);
+    } else if (!this.increaseSpeed) {
+      this.y = this.y + 3;
+    }
   }
 }
 

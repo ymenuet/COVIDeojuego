@@ -21,6 +21,7 @@ const collectSyringe = new Audio("../sounds/collect-syringe.mp3");
 const collectMask = new Audio("../sounds/collect-mask.mp3");
 const virusHit = new Audio("../sounds/virus-hit.mp3");
 const fierroViejo = new Audio("../sounds/fierro-viejo.mp3");
+fierroViejo.volume = 0.1;
 
 let frames = 0;
 const gravity = 0.98;
