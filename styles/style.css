@@ -142,3 +142,28 @@ h3 {
     align-items: center;
     text-align: center;
 }
+
+.pause-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-family: "Covered By Your Grace";
+    font-size: 1.8rem;
+    font-weight: bold;
+    opacity: 0.6;
+    transition: all 0.2s;
+    cursor: pointer;
+    outline: none;
+}
+
+.pause-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.pause-btn>img {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    top: 10px;
+}

@@ -205,6 +205,7 @@ function winner() {
             ctx.fillText(`AND ${character.gender.toUpperCase()} DID IT!!!`, 250, 370);
             ctx.fillText(`Humanity wins,`, 250, 420);
             ctx.fillText(`COVID-19 loses...`, 250, 470);
+            $pauseButton.style.display = 'none'
         }, 1000 / 3);
     }
 }
@@ -237,6 +238,8 @@ function gameOver() {
             ctx.fillText(`But ${character.gender} died,`, 250, 370);
             ctx.fillText(`and humanity as well.`, 250, 420);
             ctx.fillText(`COVID-19 wins...`, 250, 470);
+            $pauseButton.style.display = 'none'
+            $restartButton.style.display = 'block'
         }, 1000 / 3);
     }
 }
@@ -247,4 +250,12 @@ function setCharacter(chosenCharacter) {
 
 function startGame() {
     intervalId = setInterval(update, 1000 / 60);
+    $pauseButton.style.display = 'block'
+}
+
+function pauseGame() {
+    clearInterval(intervalId);
+    ctx.font = `80px 'Covered By Your Grace`
+    ctx.fillStyle = 'white';
+    ctx.fillText('GAME PAUSED', 300, 350)
 }

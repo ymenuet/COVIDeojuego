@@ -1,3 +1,4 @@
+$body = document.querySelector('body');
 $domCanvas = document.querySelector('.canvas-dom');
 
 // Landing page:
@@ -154,8 +155,49 @@ $startButton.style.marginTop = '40px'
 $startingPage.appendChild($startButton)
 
 // Event listener: Start game
+const $pauseButton = document.createElement('button')
+$pauseButton.classList.add('pause-btn')
+$pauseButton.style.display = 'none';
+$pauseButton.innerHTML = `
+<img src='../img/icons/pause.png'>
+<span>PAUSE GAME</span>
+`
+$body.appendChild($pauseButton)
+
 $startButton.addEventListener('click', () => {
     $domCanvas.style.display = 'none'
     $canvas.style.display = 'block'
     startGame();
+})
+
+// Pause event
+$pauseButton.addEventListener('click', () => {
+    const $pauseOrResume = $pauseButton.querySelector('span');
+    const $pauseOrResumeImg = $pauseButton.querySelector('img')
+    let pauseOrResumeText = $pauseOrResume.innerText;
+
+    if (pauseOrResumeText === 'PAUSE GAME') {
+        $pauseOrResume.innerText = 'RESUME GAME'
+        $pauseOrResumeImg.src = '../img/icons/play.png'
+        pauseGame()
+    } else if (pauseOrResumeText === 'RESUME GAME') {
+        $pauseOrResume.innerText = 'PAUSE GAME'
+        $pauseOrResumeImg.src = '../img/icons/pause.png'
+        startGame()
+    }
+})
+
+
+// Restart game when gameOver
+const $restartButton = document.createElement('button');
+$restartButton.classList.add('pause-btn');
+$restartButton.style.display = 'none';
+$restartButton.innerHTML = `
+<img src='../img/icons/play.png'>
+<span>RESTART GAME</span>
+`
+$body.appendChild($restartButton)
+
+$restartButton.addEventListener('click', () => {
+    window.location.reload()
 })
