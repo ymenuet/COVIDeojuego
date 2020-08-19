@@ -18,6 +18,8 @@ function update() {
     drawSeringe();
     collisionSeringe();
     passLevel();
+    generatePedestrians();
+    drawPedestrians();
     character.draw();
     winner();
     gameOver();
@@ -338,6 +340,7 @@ function addLevel() {
     keys = [];
     enemies = [];
     faceMasks = [];
+    pedestrians = [];
     seringes = [];
     seringeApparition = 500;
     winSeringe.seringePercentage.splice(0, winSeringe.seringePercentage.length);
@@ -366,5 +369,19 @@ function lastLevelMusicPlay() {
 }
 
 function generatePedestrians() {
+    if (frames % 1300 === 0) {
+        const randomMask = Math.round(Math.random());
+        if (randomMask) {
+            pedestrians.push(new Pedestrian(true))
+        } else pedestrians.push(new Pedestrian(false))
+    }
+    pedestrians.forEach((pedestrian, index) => {
+        if (pedestrian.x < -200) {
+            pedestrians.splice(index, 1)
+        }
+    })
+}
 
+function drawPedestrians() {
+    pedestrians.forEach(pedestrian => pedestrian.draw())
 }
