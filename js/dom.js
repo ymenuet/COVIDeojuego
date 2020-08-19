@@ -41,8 +41,8 @@ $instructionsList.classList.add('instruction-list')
 $instructionsList.innerHTML = `
 <li>Physical distancing: Dodge the virus <img src='../img/objects/covid.png'></li>
 <li>Use face masks: Grab the falling face masks for protection <img src='../img/objects/cubrebocas.png'></li>
-<li>Find the cure: Grab the spawning seringes in order to win <img src='../img/objects/seringeDef.png'><br>points and complete the level</li>
-<li>Tips: Use the platforms to reach your goal <img src='../img/bg/brick-platform.png'><br>and use the arrow keys of our keyboard to move <img src='../img/objects/arrow-keys.png'></li>
+<li>Find the cure: Grab the spawning syringes in order to win <img src='../img/objects/seringeDef.png'><br>points and complete the level</li>
+<li>Tips: Use the platforms to reach your goal <img src='../img/bg/brick-platform.png'><br>and use the arrow keys of your keyboard to move <img src='../img/objects/arrow-keys.png'></li>
 `
 $instructionsDiv.appendChild($instructionsList)
 

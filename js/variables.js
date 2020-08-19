@@ -15,13 +15,13 @@ const amlo = {
     name: "Andrés Manuel López Obrador",
     gender: "he",
     img: "../img/characters/amlo.png",
-    offsetX: 19,
+    offsetX: 11,
     offsetY: -35,
-    ratioWidth: 1 / 1.6,
-    ratioHeight: 1 / 1.6,
-    offsetMaskX: 22,
+    ratioWidth: 1 / 1.3,
+    ratioHeight: 1 / 1.7,
+    offsetMaskX: 19,
     offsetMaskY: 7,
-    ratioMaskWidth: 1 / 1.6,
+    ratioMaskWidth: 1 / 1.4,
     ratioMaskHeight: 1 / 3,
 };
 const trump = {
