@@ -182,7 +182,10 @@ function loadStartingPage() {
 const $startButton = document.createElement("button");
 $startButton.classList.add("landing-button");
 $startButton.innerText = "Start Game";
-$startButton.style.marginTop = "40px";
+$startButton.style.marginTop = "20px";
+$startButton.style.order = '2'
+$startButton.style.position = 'relative'
+$startButton.style.left = '5px'
 $startingPage.appendChild($startButton);
 
 // Event listener: Start game
