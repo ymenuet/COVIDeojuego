@@ -14,21 +14,49 @@ $initiateDiv.appendChild($startPhrase);
 const $initiateButton = document.createElement("button");
 $initiateButton.classList.add("landing-button");
 $initiateButton.innerText = "Start";
+$initiateButton.style.marginBottom = '30px'
 $initiateDiv.appendChild($initiateButton);
+
+const $creditsButton = document.createElement("button");
+$creditsButton.classList.add("landing-button");
+$creditsButton.innerText = "Credits";
+$initiateDiv.appendChild($creditsButton);
+
+// Credits page
+const $creditsDiv = document.createElement('div')
+$creditsDiv.classList.add('credits');
+$creditsDiv.innerHTML = `
+<h2>Credits</h2>
+<h3>Game developed by:</h3>
+<p>Edgar VILLAVICENCIO CASTILLO<br>
+&<br>
+Yvan MENUET</p>
+<h3>Special thanks to:</h3>
+<p>Joss CORREA & Jorge MARTÍNEZ</p>
+<img src='../img/icons/ironhack-logo.png'>
+`
+
+$creditsButton.addEventListener('click', () => {
+    $startPhrase.style.display = 'none';
+    $creditsButton.style.display = 'none';
+    $initiateButton.style.order = '2'
+    $initiateButton.style.margin = '20px 0 0 0'
+    $initiateDiv.appendChild($creditsDiv)
+})
 
 //2nd landing page: instructions
 $initiateButton.addEventListener("click", () => {
-  startMusic.play();
+    startMusic.play();
 
-  $initiateDiv.style.display = "none";
-  loadInstructionPage();
+    $initiateDiv.style.display = "none";
+    loadInstructionPage();
 });
 
 const $instructionsDiv = document.createElement("div");
 $instructionsDiv.classList.add("landing-div");
 
 function loadInstructionPage() {
-  $domCanvas.appendChild($instructionsDiv);
+    $domCanvas.appendChild($instructionsDiv);
 }
 
 const $instructions = document.createElement("h2");
@@ -42,10 +70,11 @@ $instructionsList = document.createElement("ul");
 $instructionsList.style.marginTop = "0px";
 $instructionsList.classList.add("instruction-list");
 $instructionsList.innerHTML = `
-<li>Physical distancing: Dodge the virus <img src='../img/objects/covid.png'></li>
-<li>Use face masks: Grab the falling face masks for protection <img src='../img/objects/cubrebocas.png'></li>
-<li>Find the cure: Grab the spawning syringes in order to win <img src='../img/objects/seringeDef.png'><br>points and complete the level</li>
-<li>Tips: Use the platforms to reach your goal <img src='../img/bg/brick-platform.png'><br>and use the arrow keys of your keyboard to move <img src='../img/objects/arrow-keys.png'></li>
+<li>Stay home: Dodge the virus <img src='../img/objects/covid.png'></li>
+<li>Social distance: Avoid people WITHOUT face masks <img src='../img/characters/pedestrian.png'></li>
+<li>Protect yourself and those around you: Grab the falling face masks for protection <img src='../img/objects/cubrebocas.png'></li>
+<li>Develop the vaccine: Grab the spawning syringes in order to win <img src='../img/objects/seringeDef.png'><br>points and complete the level</li>
+<li>Tips: Use the platforms to reach your goal <img src='../img/bg/brick-platform.png'><br>and the arrow keys of your keyboard to move and jump <img src='../img/objects/arrow-keys.png'></li>
 `;
 $instructionsDiv.appendChild($instructionsList);
 
@@ -60,15 +89,15 @@ $instructionsDiv.appendChild($nextPageButton);
 
 // 3rd landing page: choose your character
 $nextPageButton.addEventListener("click", () => {
-  $instructionsDiv.style.display = "none";
-  loadCharacterPage();
+    $instructionsDiv.style.display = "none";
+    loadCharacterPage();
 });
 
 const $charactersDiv = document.createElement("div");
 $charactersDiv.classList.add("landing-div");
 
 function loadCharacterPage() {
-  $domCanvas.appendChild($charactersDiv);
+    $domCanvas.appendChild($charactersDiv);
 }
 
 const $charactersDivTitle = document.createElement("h2");
@@ -82,7 +111,7 @@ const $charactersFacesDiv = document.createElement("div");
 $charactersFacesDiv.classList.add("faces");
 const characters = [trump, macron, putin, merkel, johnson, jinping, amlo];
 characters.forEach((character, index) => {
-  $charactersFacesDiv.innerHTML += `
+    $charactersFacesDiv.innerHTML += `
     <div class="character-card card-${index}">
     <img src='${character.img}'>
     <h3>${character.name}</h3>
@@ -98,38 +127,38 @@ $charactersDiv.appendChild($charactersFacesDiv);
 
 // Select character
 $charactersFacesDiv.addEventListener("click", (event) => {
-  switch (event.path[0].nextElementSibling.innerText) {
-    case "Donald Trump":
-      chosenCharacter = trump;
-      setCharacter(trump);
-      break;
-    case "Emmanuel Macron":
-      chosenCharacter = macron;
-      setCharacter(macron);
-      break;
-    case "Vladimir Putin":
-      chosenCharacter = putin;
-      setCharacter(putin);
-      break;
-    case "Angela Merkel":
-      chosenCharacter = merkel;
-      setCharacter(merkel);
-      break;
-    case "Boris Johnson":
-      chosenCharacter = johnson;
-      setCharacter(johnson);
-      break;
-    case "Xi Jinping":
-      chosenCharacter = jinping;
-      setCharacter(jinping);
-      break;
-    case "Andrés Manuel López Obrador":
-      chosenCharacter = amlo;
-      setCharacter(amlo);
-      break;
-  }
-  $charactersDiv.style.display = "none";
-  loadStartingPage();
+    switch (event.path[0].nextElementSibling.innerText) {
+        case "Donald Trump":
+            chosenCharacter = trump;
+            setCharacter(trump);
+            break;
+        case "Emmanuel Macron":
+            chosenCharacter = macron;
+            setCharacter(macron);
+            break;
+        case "Vladimir Putin":
+            chosenCharacter = putin;
+            setCharacter(putin);
+            break;
+        case "Angela Merkel":
+            chosenCharacter = merkel;
+            setCharacter(merkel);
+            break;
+        case "Boris Johnson":
+            chosenCharacter = johnson;
+            setCharacter(johnson);
+            break;
+        case "Xi Jinping":
+            chosenCharacter = jinping;
+            setCharacter(jinping);
+            break;
+        case "Andrés Manuel López Obrador":
+            chosenCharacter = amlo;
+            setCharacter(amlo);
+            break;
+    }
+    $charactersDiv.style.display = "none";
+    loadStartingPage();
 });
 
 // 4th landing page: Start button
@@ -137,17 +166,17 @@ const $startingPage = document.createElement("div");
 $startingPage.classList.add("landing-div");
 
 function loadStartingPage() {
-  $domCanvas.appendChild($startingPage);
+    $domCanvas.appendChild($startingPage);
 
-  const $chosenCharacterDiv = document.createElement("div");
-  $chosenCharacterDiv.classList.add("ready-to-play");
-  $chosenCharacterDiv.style.color = "white";
-  $chosenCharacterDiv.style.fontSize = "1.3rem";
-  $chosenCharacterDiv.innerHTML = `
+    const $chosenCharacterDiv = document.createElement("div");
+    $chosenCharacterDiv.classList.add("ready-to-play");
+    $chosenCharacterDiv.style.color = "white";
+    $chosenCharacterDiv.style.fontSize = "1.3rem";
+    $chosenCharacterDiv.innerHTML = `
     <h2>You chose to play with: ${chosenCharacter.name}</h2>
     <img src="${chosenCharacter.img}">
     `;
-  $startingPage.appendChild($chosenCharacterDiv);
+    $startingPage.appendChild($chosenCharacterDiv);
 }
 
 const $startButton = document.createElement("button");
@@ -168,31 +197,31 @@ $pauseButton.innerHTML = `
 $body.appendChild($pauseButton);
 
 $startButton.addEventListener("click", () => {
-  startMusic.pause();
-  generalMusic.play();
-  backgroundSound.play();
-  $domCanvas.style.display = "none";
-  $canvas.style.display = "block";
-  startGame();
+    startMusic.pause();
+    generalMusic.play();
+    backgroundSound.play();
+    $domCanvas.style.display = "none";
+    $canvas.style.display = "block";
+    startGame();
 });
 
 // Pause event
 $pauseButton.addEventListener("click", () => {
-  const $pauseOrResume = $pauseButton.querySelector("span");
-  const $pauseOrResumeImg = $pauseButton.querySelector("img");
-  let pauseOrResumeText = $pauseOrResume.innerText;
+    const $pauseOrResume = $pauseButton.querySelector("span");
+    const $pauseOrResumeImg = $pauseButton.querySelector("img");
+    let pauseOrResumeText = $pauseOrResume.innerText;
 
-  if (pauseOrResumeText === "PAUSE GAME") {
-    $pauseOrResume.innerText = "RESUME GAME";
-    $pauseOrResumeImg.src = "../img/icons/play.png";
-    backgroundSound.pause();
-    pauseGame();
-  } else if (pauseOrResumeText === "RESUME GAME") {
-    $pauseOrResume.innerText = "PAUSE GAME";
-    $pauseOrResumeImg.src = "../img/icons/pause.png";
-    backgroundSound.play();
-    startGame();
-  }
+    if (pauseOrResumeText === "PAUSE GAME") {
+        $pauseOrResume.innerText = "RESUME GAME";
+        $pauseOrResumeImg.src = "../img/icons/play.png";
+        backgroundSound.pause();
+        pauseGame();
+    } else if (pauseOrResumeText === "RESUME GAME") {
+        $pauseOrResume.innerText = "PAUSE GAME";
+        $pauseOrResumeImg.src = "../img/icons/pause.png";
+        backgroundSound.play();
+        startGame();
+    }
 });
 
 // Next level button
@@ -206,7 +235,7 @@ $nextButton.innerHTML = `
 $body.appendChild($nextButton);
 
 $nextButton.addEventListener("click", () => {
-  addLevel();
+    addLevel();
 });
 
 // Restart game when gameOver
@@ -220,5 +249,5 @@ $restartButton.innerHTML = `
 $body.appendChild($restartButton);
 
 $restartButton.addEventListener("click", () => {
-  window.location.reload();
+    window.location.reload();
 });
