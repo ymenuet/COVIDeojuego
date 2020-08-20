@@ -198,7 +198,7 @@ function printLevel() {
 
 function winner() {
     if (
-        winSeringe.seringePercentage.length > 9 &&
+        winSeringe.seringePercentage.length > 2 && // > 9 for the final version but we put 2 for the demo
         currentLevel >= 5 &&
         !gameOver()
     ) {
@@ -245,7 +245,7 @@ function winner() {
 
 function passLevel() {
     if (
-        winSeringe.seringePercentage.length > 9 &&
+        winSeringe.seringePercentage.length > 2 && // > 9 for the final version but we put 2 for the demo
         currentLevel < 5 &&
         !gameOver()
     ) {
@@ -400,7 +400,7 @@ function accelerateVirus() {
 }
 
 function generatePedestrians() {
-    if (frames % 1300 === 0) {
+    if (frames % 800 === 0) { // modulo 1300 normalmente pero 800 para la demo
         const randomMask = Math.round(Math.random());
         if (randomMask) {
             pedestrians.push(new Pedestrian(true));
