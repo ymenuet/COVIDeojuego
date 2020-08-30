@@ -294,7 +294,7 @@ class WinSeringe {
         ctx.fillRect(
             this.x + 5,
             this.y + 26,
-            (this.width - 100) * (this.seringePercentage.length / 3), // dividido entre 3 para el demo pero normalmente entre 10
+            (this.width - 100) * (this.seringePercentage.length / 10),
             this.height - 55
         );
     }

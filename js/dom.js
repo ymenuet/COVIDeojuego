@@ -120,11 +120,6 @@ characters.forEach((character, index) => {
 });
 $charactersDiv.appendChild($charactersFacesDiv);
 
-// const $characterCards = document.querySelectorAll('.character-card')
-// $characterCards.forEach(character => {
-//     $characterButtons.push(character)
-// })
-
 // Select character
 $charactersFacesDiv.addEventListener("click", (event) => {
     switch (event.path[0].nextElementSibling.innerText) {
