@@ -22,6 +22,7 @@ function update() {
     drawPedestrians();
     fierroViejoFn();
     collisionPedestrian();
+    stopAcceleration();
     character.draw();
     winner();
     gameOver();
@@ -318,7 +319,11 @@ function gameOver() {
             ctx.fillText(`${character.name}`, 250, 270);
             ctx.fillText(`tried to save the world.`, 250, 320);
             ctx.fillText(`But ${character.gender} died,`, 250, 370);
-            ctx.fillText(`and humanity with ${character.gender === 'he' ? 'him' : 'her'}.`, 250, 420);
+            ctx.fillText(
+                `and humanity with ${character.gender === "he" ? "him" : "her"}.`,
+                250,
+                420
+            );
             ctx.fillText(`COVID-19 wins...`, 250, 470);
             $pauseButton.style.display = "none";
             $restartButton.style.display = "block";
@@ -345,6 +350,8 @@ function addLevel() {
     pedestrians = [];
     seringes = [];
     seringeApparition = 500;
+    accelerateVirusLet = false;
+    alarm.volume = 0;
     winSeringe.seringePercentage.splice(0, winSeringe.seringePercentage.length);
     startGame();
 }
@@ -371,7 +378,7 @@ function lastLevelMusicPlay() {
 }
 
 function fierroViejoFn() {
-    if (frames % 4000 === 0) {
+    if (frames % 3500 === 0) {
         fierroViejo.play();
     }
 }
@@ -390,13 +397,18 @@ function collisionPedestrian() {
 }
 
 function accelerateVirus() {
+    framesAcc = frames;
     accelerateVirusLet = true;
+    alarm.volume = 0.7;
     alarm.play();
-    alarm.volume = 1;
-    setTimeout(() => {
+}
+
+function stopAcceleration() {
+    if (frames > framesAcc + 900) {
         accelerateVirusLet = false;
         alarm.volume = 0;
-    }, 18000);
+        alarm.pause()
+    }
 }
 
 function generatePedestrians() {

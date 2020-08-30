@@ -213,11 +213,13 @@ $pauseButton.addEventListener("click", () => {
         $pauseOrResume.innerText = "RESUME GAME";
         $pauseOrResumeImg.src = "../img/icons/play.png";
         backgroundSound.pause();
+        alarm.pause();
         pauseGame();
     } else if (pauseOrResumeText === "RESUME GAME") {
         $pauseOrResume.innerText = "PAUSE GAME";
         $pauseOrResumeImg.src = "../img/icons/pause.png";
         backgroundSound.play();
+        alarm.play();
         startGame();
     }
 });

@@ -3,8 +3,8 @@ class Board {
     constructor(width, height, imageSrc) {
         this.x = 0;
         this.y = 0;
-        this.width = width; //1564
-        this.height = height; //626
+        this.width = width;
+        this.height = height;
         this.image = new Image();
         this.image.src = imageSrc;
         this.image.onload = () => this.draw();
