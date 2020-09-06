@@ -1,5 +1,4 @@
 # COVIDeojuego
-<br>
 Ironhack Mexico | Web Development full-time bootcamp, August 2020 | Project #1 
 <br>
 <br>
