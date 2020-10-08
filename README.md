@@ -7,4 +7,4 @@ Videogame for computer developped in 4 days after 2 weeks of Web Development cla
 Play here (optimized for Google Chrome): https://covideojuego.netlify.app/
 <br>
 <br>
-Authors: Edgar Antonio VILLAVICENCIO CASTILLO & Yvan MENUET
+Authors: [Edgar Antonio VILLAVICENCIO CASTILLO](https://github.com/edvicaty) & [Yvan MENUET](https://github.com/ymenuet)
